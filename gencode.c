@@ -11,13 +11,25 @@
 static void to_upper (char* dst, const char* src)
 {
     for (; *src; src++, dst++) {
-        if ((*src >= 'a') && (*src <= 'z'))
+        if ((*src >= 'a') && (*src <= 'z')) {
             *dst = *src - 'a' + 'A';
-        else
+        } else {
             *dst = *src;
+        }
     }
 
     *dst = '\0';
+}
+
+static void minus2hyphen (char* dst, const char* src)
+{
+    for (; *src; src++, dst++) {
+        if ('-' == *src) {
+            *dst = '_';
+        } else {
+            *dst = *src;
+        }
+    }
 }
 
 static void version_history (void)
@@ -105,6 +117,7 @@ int main (int argc, char* argv[])
     printf("\n");
 
     to_upper(buffer, filename);
+    minus2hyphen(buffer, buffer);
     printf("#ifndef %s_H_\n", buffer);
     printf("#define %s_H_\n", buffer);
     printf("\n");
