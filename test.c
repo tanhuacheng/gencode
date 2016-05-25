@@ -1,18 +1,23 @@
 /*
 *********************************************************************************************************
-* 文件: ttypes.c
+* 文件: test.c
 * 版本: V0.00
-* 创建: Sat May 21 18:12:28 2016
+* 创建: Wed May 25 21:51:28 2016
 * 作者: 谭化成
-* 描述: 测试types.h中定义的基本数据类型
+* 描述: 测试
 *********************************************************************************************************
 */
 
 /* 包含头文件 -----------------------------------------------------------------------------------------*/
 #include <stdio.h>
-#include "ttypes.h"
+#include "test.h"
 
 /* 私有宏定义 -----------------------------------------------------------------------------------------*/
+#define DEF_TEST(type)                                  \
+void type##_test (void)                                 \
+{                                                       \
+    printf("sizeof(" #type ") = %ld\n", sizeof(type));  \
+}
 
 /* 私有数据类型声明 -----------------------------------------------------------------------------------*/
 
@@ -21,26 +26,46 @@
 /* 私有函数声明 ---------------------------------------------------------------------------------------*/
 
 /* 函数定义 -------------------------------------------------------------------------------------------*/
+
+DEF_TEST(bool);
+
+DEF_TEST(int8_t)
+DEF_TEST(int16_t)
+DEF_TEST(int32_t)
+DEF_TEST(int64_t)
+
+DEF_TEST(uint8_t)
+DEF_TEST(uint16_t)
+DEF_TEST(uint32_t)
+DEF_TEST(uint64_t)
+
 int main (int argc, char* argv[])
 {
-    printf("sizeof(uint8_t)\t\t= %ld\n", sizeof(uint8_t));
-    printf("sizeof(int8_t)\t\t= %ld\n", sizeof(int8_t));
+    int32_t i = 2;
+    uint8_t j = 3;
 
-    printf("sizeof(uint16_t)\t= %ld\n", sizeof(uint16_t));
-    printf("sizeof(int16_t)\t\t= %ld\n", sizeof(int16_t));
+    bool t = i < j;
+    bool f = i > j;
 
-    printf("sizeof(uint32_t)\t= %ld\n", sizeof(uint32_t));
-    printf("sizeof(int32_t)\t\t= %ld\n", sizeof(int32_t));
+    printf("\n");
+    printf("i:%d, j:%d, i<j:%d, i>j:%d, true:%d, false:%d.\n",
+            i, j, t, f, true, false);
 
-    printf("sizeof(uint64_t)\t= %ld\n", sizeof(uint64_t));
-    printf("sizeof(int64_t)\t\t= %ld\n", sizeof(int64_t));
+    printf("\n");
+    bool_test();
 
-    printf("sizeof(fp32_t)\t\t= %ld\n", sizeof(fp32_t));
-    printf("sizeof(fp64_t)\t\t= %ld\n", sizeof(fp64_t));
+    printf("\n");
+    int8_t_test();
+    int16_t_test();
+    int32_t_test();
+    int64_t_test();
 
-    printf("sizeof(BOOL)\t\t= %ld\n", sizeof(BOOL));
-    printf("TRUE\t\t\t= %d\n", TRUE);
-    printf("FALSE\t\t\t= %d\n", FALSE);
+    printf("\n");
+    uint8_t_test();
+    uint16_t_test();
+    uint32_t_test();
+    uint64_t_test();
+    printf("\n");
 
     return 0;
 }

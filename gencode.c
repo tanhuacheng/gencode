@@ -1,6 +1,7 @@
 // 这个程序用于在Linux下生成一个简单的C语言模板文件(包括头文件和源文件)
 
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
@@ -11,11 +12,7 @@
 static void to_upper (char* dst, const char* src)
 {
     for (; *src; src++, dst++) {
-        if ((*src >= 'a') && (*src <= 'z')) {
-            *dst = *src - 'a' + 'A';
-        } else {
-            *dst = *src;
-        }
+        *dst = toupper(*src);
     }
 
     *dst = '\0';
@@ -122,7 +119,8 @@ int main (int argc, char* argv[])
     printf("#define %s_H_\n", buffer);
     printf("\n");
     printf("/* 包含头文件 -----------------------------------------------------------------------------------------*/\n");
-    printf("#include \"types.h\"\n");
+    printf("#include <stdint.h>\n");
+    printf("#include <stdbool.h>\n");
     printf("\n");
     printf("#ifdef __cplusplus\n");
     printf("  extern \"C\" {\n");
