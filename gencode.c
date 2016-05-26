@@ -4,8 +4,9 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
 #include <time.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #define FILE_NAME_SIZE 64
 
